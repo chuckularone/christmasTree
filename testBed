@@ -1,8 +1,4 @@
-// This sketch was originally written for Burning Man in 2015.
-// It has layed around stagnant for over 8 years.
-// I resurected it to drive the Christmas tree in 2023 
-
-
+// This sketch is for testing new patterns without breaking the main script!
 #include <Adafruit_NeoPixel.h>
 #ifdef __AVR__
     #include <avr/power.h>
@@ -10,20 +6,10 @@
 #include <SoftwareSerial.h>
 
 #define PIXPIN 7
-#define PIXELS 150
-#define HALFPIXELS 75
+#define PIXELS 200
+#define HALFPIXELS 100
 
-const int buttonPin = 2;     // the number of the pushbutton pin
 const int ledPin =  7;       // the number of the LED pin
-int buttonState = 0;         // variable for reading the pushbutton status
-int counter = 1;             // Store the number of button presses
-int lastButtonState = LOW;   // the previous reading from the input pin
-
-// the following variables are long's because the time, measured in miliseconds,
-// will quickly become a bigger number than can be stored in an int.
-long lastDebounceTime = 0;  // the last time the output pin was toggled
-long debounceDelay = 50;    // the debounce time; increase if the output flickers
-
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(PIXELS, PIXPIN, NEO_GRB + NEO_KHZ800);
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -31,71 +17,19 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(PIXELS, PIXPIN, NEO_GRB + NEO_KHZ800
 //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 void setup() {
   strip.begin();
-  strip.setBrightness(30);
   strip.show();
-  Serial.begin(9600);
-  pinMode(buttonPin, INPUT);
 }
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 // Start main loop
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 void loop() {
- int i = 0;
-  int reading = digitalRead(buttonPin);
-  if (reading != lastButtonState) {
-    // reset the debouncing timer
-    lastDebounceTime = millis();
-  }  
-  Serial.print("Reading: ");
-  Serial.print(reading);
-  Serial.print(" :: lastButtonState: ");
-  Serial.print(lastButtonState);
-  Serial.print(" :: Counter: ");
-  Serial.println(counter);
-
-    if ((millis() - lastDebounceTime) > debounceDelay) {
-    // whatever the reading is at, it's been there for longer
-    // than the debounce delay, so take it as the actual current state:
-    // if the button state has changed:
-    if (reading != buttonState) {
-      buttonState = reading; 
-      if (buttonState == HIGH) {
-        if (counter <= 6) {
-          counter = counter + 1;
-          Serial.println("Button Press!");
-        } else {
-          counter = 1;
-        }
-      }
-    }
-    if (counter == 1) {
-      randomTwinkle();
-    }
-    if (counter == 2) {
-      twoColor1to5Chase();
-    }
-    if (counter == 3) {
-      theaterChase(strip.Color(127, 255, 127), 50);
-    }
-    if (counter == 4) {
-      rainbowCycle(1);
-    }
-    if (counter == 5) {
-      whites();
-    }
-    if (counter == 6) {
-      wigwags();
-    }
-  }
-  lastButtonState = reading;//end loop
-}
-
+  testFunction();
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 // Functions below
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-void wigwags(void) {
+void testFunction(void) {
   int waitTime=500;
   int i = 0;
   strip.setBrightness(60);
