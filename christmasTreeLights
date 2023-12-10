@@ -10,9 +10,17 @@
 #include <SoftwareSerial.h>
 
 #define PIXPIN 7
-#define PIXELS 250
-#define INTERVAL 25
-#define HALFPIXELS 125
+
+//production constants
+//#define PIXELS 450
+//#define INTERVAL 25
+//#define HALFPIXELS 225
+
+//testing constants
+#define PIXELS 50
+#define INTERVAL 5
+#define HALFPIXELS 25
+
 
 const int buttonPin = 2;     // the number of the pushbutton pin
 const int ledPin =  7;       // the number of the LED pin
